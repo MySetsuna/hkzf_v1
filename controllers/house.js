@@ -565,41 +565,43 @@ module.exports = {
         let {
             name
         } = ctx.query;
-        // let data = await dataBash.House.cityFindOne({
-        //     where: {name}
-        // });
+        let data = await dataBash.House.cityFindOne({
+            where: {name}
+        });
 
-        // if (!data) {
-        //     name = "上海";
-        //     data = await dataBash.House.cityFindOne({
-        //         where: {name}
-        //     });
-        // }
-        let arr = [{
-                "label": "北京",
-                "value": "AREA|88cff55c-aaa4-e2e0"
-            },
-            {
-                "label": "广州",
-                "value": "AREA|e4940177-c04c-383d"
-            },
-            {
-                "label": "上海",
-                "value": "AREA|dbf46d32-7e76-1196"
-            },
-            {
-                "label": "深圳",
-                "value": "AREA|a6649a11-be98-b150"
-            },
-        ];
+        if (!data) {
+            name = "上海";
+            data = await dataBash.House.cityFindOne({
+                where: {name}
+            });
+        }
+        // let arr = [{
+        //         "label": "北京",
+        //         "value": "AREA|88cff55c-aaa4-e2e0"
+        //     },
+        //     {
+        //         "label": "广州",
+        //         "value": "AREA|e4940177-c04c-383d"
+        //     },
+        //     {
+        //         "label": "上海",
+        //         "value": "AREA|dbf46d32-7e76-1196"
+        //     },
+        //     {
+        //         "label": "深圳",
+        //         "value": "AREA|a6649a11-be98-b150"
+        //     },
+        // ];
 
-        let list = arr.find(v => (new RegExp(v.label).test(name)))
+        // let list = arr.find(v => (new RegExp(v.label).test(name)))
+
+        //console.log(data)
 
         ctx.body.description = "请求成功";
         ctx.body.status = 200;
-        ctx.body.body = list || {
-            "label": "上海",
-            "value": "AREA|dbf46d32-7e76-1196"
+        ctx.body.body = data || {
+            "name": "上海",
+            "code": "AREA|dbf46d32-7e76-1196"
         }
     },
 
